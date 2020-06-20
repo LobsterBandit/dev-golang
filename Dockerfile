@@ -67,12 +67,11 @@ RUN curl -fsSL https://starship.rs/install.sh | bash -s -- -y \
     && echo "\neval \"\$(starship init bash)\"\n" | tee -a /root/.bashrc >> /home/$USERNAME/.bashrc \
     && chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc \
     && mkdir -p /root/.config /home/$USERNAME/.config \
-    && touch /root/.config/starship.toml /home/$USERNAME/.config/starship.toml \
-    && echo "[username]\nshow_always = true\n\n[hostname]\nssh_only = false\n\n[directory]\ntruncation_length = 8" \
+    && wget -qO- https://raw.githubusercontent.com/LobsterBandit/dotfiles/master/starship.toml \
     | tee -a /root/.config/starship.toml >> /home/$USERNAME/.config/starship.toml \
     && chown -R $USER_UID:$USER_GID /home/$USERNAME/.config
 
-ENV LANG=en_US.UTF-8 \
+ENV LANG=$LOCALE \
     DEBIAN_FRONTEND=dialog \
     GOBIN=/go/bin \
     USER=$USERNAME
