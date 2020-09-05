@@ -4,11 +4,17 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
     tags:
       - "v*.*.*"
   pull_request:
     branches:
       - master
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
 
 env:
   IMAGE_NAME: lobsterbandit/dev-golang
