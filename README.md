@@ -1,6 +1,6 @@
 # golang dev image
 
-> golang development image based on [`golang:latest`](https://hub.docker.com/_/golang/)
+> golang development image based on [`golang`](https://hub.docker.com/_/golang/) official images
 
 ## Includes
 
