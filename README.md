@@ -5,10 +5,12 @@
 ## Includes
 
 - `gopher` non-root user with sudo access
-  - pass ARG USERNAME to rename
+- Build args and defaults:
+  - ARG USERNAME=gopher
   - ARG USER_UID=1000
   - ARG USER_GID=USER_UID
-- ARG LOCALE=en_US.UTF-8
+  - ARG WORKDIR=/usr/src
+  - ARG LOCALE=en_US.UTF-8
 - shell prompt configuration with [starship.rs](https://starship.rs/)
 - [JetBrains Mono](https://www.jetbrains.com/lp/mono/) Powerline font
 - go tools required for vs code golang extension

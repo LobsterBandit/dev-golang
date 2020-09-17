@@ -4,6 +4,7 @@ ARG USERNAME=gopher
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 ARG LOCALE=en_US.UTF-8
+ARG WORKDIR=/usr/src
 
 # Configure apt and install packages
 ENV DEBIAN_FRONTEND=noninteractive
@@ -34,17 +35,6 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-# get go tools
-RUN go get github.com/go-delve/delve/cmd/dlv \
-    && go get golang.org/x/tools/cmd/goimports \
-    && go get golang.org/x/tools/cmd/gorename \
-    && go get golang.org/x/tools/gopls \
-    && go get github.com/golangci/golangci-lint/cmd/golangci-lint \
-    && mv /go/bin/* /usr/local/go/bin \
-    #
-    # Clean up
-    && rm -rf /go/src/* /go/pkg
-
 # Setup user
 RUN adduser --shell /bin/bash --uid $USER_UID --disabled-password --gecos "" $USERNAME \
     && mkdir -p /etc/sudoers.d \
@@ -71,6 +61,22 @@ RUN curl -fsSL https://starship.rs/install.sh | bash -s -- -y \
     | tee -a /root/.config/starship.toml >> /home/$USERNAME/.config/starship.toml \
     && chown -R $USER_UID:$USER_GID /home/$USERNAME/.config
 
+# get go tools
+RUN mkdir -p /tmp/go
+COPY go.* /tmp/go/
+RUN cd /tmp/go \
+    && go get github.com/go-delve/delve/cmd/dlv \
+    && go get golang.org/x/tools/cmd/goimports \
+    && go get golang.org/x/tools/cmd/gorename \
+    && go get golang.org/x/tools/gopls \
+    && go get github.com/golangci/golangci-lint/cmd/golangci-lint \
+    && mv /go/bin/* /usr/local/go/bin \
+    #
+    # Clean up
+    && cd /go \
+    && rm -rf /tmp/go \
+    && rm -rf /go/src/* /go/pkg
+
 ENV LANG=$LOCALE \
     DEBIAN_FRONTEND=dialog \
     GOBIN=/go/bin \
@@ -78,6 +84,6 @@ ENV LANG=$LOCALE \
 
 USER $USERNAME
 
-WORKDIR /go
+WORKDIR $WORKDIR
 
-CMD [ "bash" ]
+ENTRYPOINT [ "bash" ]
