@@ -39,7 +39,7 @@ RUN go get github.com/go-delve/delve/cmd/dlv \
     && go get golang.org/x/tools/cmd/goimports \
     && go get golang.org/x/tools/cmd/gorename \
     && go get golang.org/x/tools/gopls \
-    && go get github.com/golangci/golangci-lint \
+    && go get github.com/golangci/golangci-lint/cmd/golangci-lint \
     && mv /go/bin/* /usr/local/go/bin \
     #
     # Clean up
