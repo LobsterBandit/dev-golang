@@ -34,13 +34,16 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-# get go tools defined in { go.mod, go.sum }
-# COPY go.* ./
-# RUN go mod download \
-#     && mv /go/bin/* /usr/local/go/bin \
-#     #
-#     # Clean up
-#     && rm -rf /go/src/* /go/pkg
+# get go tools
+RUN go get github.com/go-delve/delve/cmd/dlv \
+    && go get golang.org/x/tools/cmd/goimports \
+    && go get golang.org/x/tools/cmd/gorename \
+    && go get golang.org/x/tools/gopls \
+    && go get github.com/golangci/golangci-lint \
+    && mv /go/bin/* /usr/local/go/bin \
+    #
+    # Clean up
+    && rm -rf /go/src/* /go/pkg
 
 # Setup user
 RUN adduser --shell /bin/bash --uid $USER_UID --disabled-password --gecos "" $USERNAME \
