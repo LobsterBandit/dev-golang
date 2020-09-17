@@ -34,16 +34,13 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-# get go tools
-RUN go get github.com/go-delve/delve/cmd/dlv \
-    && go get golang.org/x/tools/cmd/goimports \
-    && go get golang.org/x/tools/cmd/gorename \
-    && GO111MODULE=on go get golang.org/x/tools/gopls@latest \
-    && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /go/bin v1.27.0 \
-    && mv /go/bin/* /usr/local/go/bin \
-    #
-    # Clean up
-    && rm -rf /go/src/* /go/pkg
+# get go tools defined in { go.mod, go.sum }
+# COPY go.* ./
+# RUN go mod download \
+#     && mv /go/bin/* /usr/local/go/bin \
+#     #
+#     # Clean up
+#     && rm -rf /go/src/* /go/pkg
 
 # Setup user
 RUN adduser --shell /bin/bash --uid $USER_UID --disabled-password --gecos "" $USERNAME \
@@ -56,7 +53,7 @@ RUN mkdir -p /home/$USERNAME/.vscode-server/extensions /home/$USERNAME/.vscode-s
     && chown -R $USERNAME /home/$USERNAME/.vscode-server /home/$USERNAME/.vscode-server-insiders
 
 # Powerline font - JetBrains Mono
-RUN wget -qO temp.zip https://github.com/JetBrains/JetBrainsMono/releases/download/v1.0.6/JetBrainsMono-1.0.6.zip \
+RUN wget -qO temp.zip $(curl -s https://api.github.com/repos/JetBrains/JetBrainsMono/releases/latest | grep browser_download_url | cut -d '"' -f 4) \
     && unzip temp.zip -d /usr/share/fonts \
     && rm temp.zip \
     && fc-cache -fv \
