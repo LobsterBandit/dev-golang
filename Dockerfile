@@ -9,9 +9,9 @@ ARG WORKDIR=/usr/src
 # Configure apt and install packages
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
-    && apt-get upgrade \
-    && apt-get -y install --no-install-recommends apt-utils 2>&1 \
-    && apt-get -y install --no-install-recommends \
+    && apt-get -y -q upgrade \
+    && apt-get -y -q install --no-install-recommends apt-utils 2>&1 \
+    && apt-get -y -q install --no-install-recommends \
     dialog \
     git \
     openssh-client \
