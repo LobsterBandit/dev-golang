@@ -69,7 +69,7 @@ RUN cd /tmp/go \
     && go get golang.org/x/tools/cmd/goimports \
     && go get golang.org/x/tools/cmd/gorename \
     && go get golang.org/x/tools/gopls \
-    && go get github.com/golangci/golangci-lint/cmd/golangci-lint \
+    && curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | bash -s -- -b $(go env GOPATH)/bin \
     && mv /go/bin/* /usr/local/go/bin \
     #
     # Clean up
