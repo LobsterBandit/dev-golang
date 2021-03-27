@@ -63,7 +63,7 @@ RUN curl -fsSL https://starship.rs/install.sh | bash -s -- -y \
 
 # get go tools
 RUN mkdir -p /tmp/go
-COPY go.* /tmp/go/
+
 RUN cd /tmp/go \
     && go get github.com/go-delve/delve/cmd/dlv \
     && go get golang.org/x/tools/cmd/goimports \
