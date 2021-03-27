@@ -31,5 +31,5 @@ jobs:
         uses: anothrNick/github-tag-action@1.35.0
         if: steps.check.outputs.PUSH_TAG
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TAG_ACTION_TOKEN }}
           CUSTOM_TAG: ${{ steps.check.outputs.TAG_NAME }}
