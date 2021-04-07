@@ -1,9 +1,9 @@
 name: Tag Version
 
 on:
-  # Triggers the workflow on push events but only for the master branch
+  # Triggers the workflow on push events but only for the main branch
   push:
-    branches: [ master ]
+    branches: [main]
 
 jobs:
   build:
@@ -14,8 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: '0'
-          
+          fetch-depth: "0"
+
       - name: Check commit message
         id: check
         run: |
@@ -26,7 +26,7 @@ jobs:
             echo ::set-output name=TAG_NAME::${name}
             echo ::set-output name=PUSH_TAG::true
           fi
-          
+
       - name: Tag Version
         uses: anothrNick/github-tag-action@1.35.0
         if: steps.check.outputs.PUSH_TAG
