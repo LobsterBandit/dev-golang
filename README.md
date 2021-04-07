@@ -13,11 +13,11 @@
   - ARG LOCALE=en_US.UTF-8
 - shell prompt configuration with [starship.rs](https://starship.rs/)
 - [JetBrains Mono](https://www.jetbrains.com/lp/mono/) Powerline font
-- go tools required for vs code golang extension
-  - gopls
-  - delve
-  - goimports
-  - gorename
-  - golangci-lint
+- [go tools required for vs code golang extension](https://github.com/golang/vscode-go/blob/master/docs/tools.md)
+  - [gopls](https://github.com/golang/tools/tree/master/gopls)
+  - [delve](github.com/go-delve/delve)
+  - [gopkgs](https://github.com/uudashr/gopkgs)
+  - [go-outline](github.com/ramya-rao-a/go-outline)
+  - [golangci-lint](https://golangci-lint.run/)
 - \$GOPATH = /go
 - \$GOBIN = /go/bin
