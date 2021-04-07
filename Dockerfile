@@ -66,8 +66,8 @@ RUN mkdir -p /tmp/go
 
 RUN cd /tmp/go \
     && go get github.com/go-delve/delve/cmd/dlv \
-    && go get golang.org/x/tools/cmd/goimports \
-    && go get golang.org/x/tools/cmd/gorename \
+    && go get github.com/uudashr/gopkgs/v2/cmd/gopkgs \
+    && go get github.com/ramya-rao-a/go-outline \
     && go get golang.org/x/tools/gopls \
     && curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | bash -s -- -b $(go env GOPATH)/bin \
     && mv /go/bin/* /usr/local/go/bin \
