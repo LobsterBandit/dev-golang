@@ -12,6 +12,7 @@ RUN apt-get update \
     && apt-get -y -q upgrade \
     && apt-get -y -q install --no-install-recommends apt-utils 2>&1 \
     && apt-get -y -q install --no-install-recommends \
+    bash-completion \
     dialog \
     git \
     openssh-client \
