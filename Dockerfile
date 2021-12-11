@@ -66,10 +66,10 @@ RUN curl -fsSL https://starship.rs/install.sh | bash -s -- -y \
 RUN mkdir -p /tmp/go
 
 RUN cd /tmp/go \
-    && go get github.com/go-delve/delve/cmd/dlv \
-    && go get github.com/uudashr/gopkgs/v2/cmd/gopkgs \
-    && go get github.com/ramya-rao-a/go-outline \
-    && go get golang.org/x/tools/gopls \
+    && go install github.com/go-delve/delve/cmd/dlv@latest \
+    && go install github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest \
+    && go install github.com/ramya-rao-a/go-outline@latest \
+    && go install golang.org/x/tools/gopls@latest \
     && curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | bash -s -- -b $(go env GOPATH)/bin \
     && mv /go/bin/* /usr/local/go/bin \
     #
