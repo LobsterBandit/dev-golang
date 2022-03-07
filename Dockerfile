@@ -1,4 +1,4 @@
-FROM golang:1.17.6
+FROM golang:1.17.8
 
 ARG USERNAME=gopher
 ARG USER_UID=1000
