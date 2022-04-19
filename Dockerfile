@@ -54,7 +54,7 @@ RUN wget -qO temp.zip $(curl -s https://api.github.com/repos/JetBrains/JetBrains
     && echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.bashrc >> /home/$USERNAME/.bashrc
 
 # Setup starship prompt
-RUN curl -fsSL https://starship.rs/install.sh | bash -s -- -y \
+RUN curl -fsSL https://starship.rs/install.sh | sh -s -- -y \
     && echo "\neval \"\$(starship init bash)\"\n" | tee -a /root/.bashrc >> /home/$USERNAME/.bashrc \
     && chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc \
     && mkdir -p /root/.config /home/$USERNAME/.config \
